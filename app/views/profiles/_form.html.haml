@@ -1,0 +1,7 @@
+= simple_form_for(@profile, html: { class: 'form-horizontal', multipart: true }) do |f|
+  = f.input :name, label: "Name"
+  = f.input :last_name, label: "Last Name"
+  = f.input :phone, label: "Phone number"
+  = f.input :email, label: "E-mail"
+  = f.input :birth, label: "Birth Date"
+  = f.button :submit

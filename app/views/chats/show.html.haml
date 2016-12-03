@@ -1,0 +1,14 @@
+%h1
+  = @chat.name
+.chat
+  %ul
+    - @messages.each do |m|
+      %li
+        .title= m.user.email
+        %p= m.text
+= render 'messages/form_sent'
+%br/
+.btn-group
+  = link_to "Edit", edit_chat_path, class: "btn btn-default"
+  = link_to "Home", root_path, class: "btn btn-default"
+  = link_to "Delete", chat_path(@chat), method: :delete, class: "btn btn-danger"

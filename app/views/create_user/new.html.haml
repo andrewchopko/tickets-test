@@ -1,0 +1,10 @@
+%h2 Sign up
+
+= simple_form_for(@user, url: create_user_index_path(@user), html: { class: 'form-horizontal', multipart: true, method: :post }) do |f|
+  = f.input :email, autofocus: true
+  = f.input :password, autocomplete: "off"
+  = f.input :password_confirmation, autocomplete: "off"
+  = f.input :role, collection: User.roles.keys.to_a
+  = f.button :submit
+%br/
+= link_to "Back", root_path, class: "btn btn-primary"

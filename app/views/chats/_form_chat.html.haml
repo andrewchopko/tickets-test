@@ -1,0 +1,5 @@
+= simple_form_for @chat do |f|
+  = f.input :name, label: "Chat Name"
+  = f.input :second_user, collection: User.where.not(id: current_user.id), label_method: :email, value_method: :id, label: "Select another user", include_blank: false
+  %br/
+  = f.button :submit, "Create Chat"

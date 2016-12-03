@@ -1,0 +1,40 @@
+.name
+  %p= "Name: " + @profile.name + " " + @profile.last_name
+.phone
+  %p= "Phone number: " + @profile.phone.to_s
+.email
+  %p= "E-mail: " + current_user.email
+.birth
+  %p= "Birthday: " + @profile.birth.strftime("%d/%m/%Y") if @profile.birth != nil
+.role
+  %p= "Role: " + current_user.role
+.btn-group
+  = link_to "Edit My Profile", edit_profile_path(@profile), class: "btn btn-primary"
+  = link_to "Exit", destroy_user_session_path, method: :delete, class: "btn btn-primary"
+  = link_to "Create Chat", new_chat_path(@chat), class: "btn btn-success"
+
+  - if current_user.admin?
+    = link_to "Add new User", new_create_user_path, class: "btn btn-primary"
+    = link_to "Delete this User", user_registration_path, method: :delete, class: "btn btn-primary"
+    = link_to "Edit User", edit_user_registration_path, class: "btn btn-primary"
+.unread
+  - if @unread > 0
+    %p= "You have #{@unread} messages!"
+  - else
+    %p You dont have new messages!
+.check
+  .btn.btn-default
+    Check again
+%h3= current_user.email + ' chats'
+- if @chats.blank?
+  %p You haven't chats yet!
+- else
+  - @chats.each do |chat|
+    = link_to (chat.name), chat_path(chat)
+:javascript
+  $(document).on("click", '.check', function(){
+    $.ajax({
+      url: "#{j unread_messages_path}", // Route to the Script Controller method
+      type: "POST"
+      });
+  });
